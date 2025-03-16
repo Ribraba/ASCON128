@@ -1,0 +1,56 @@
+# Script de compilation du projet ASCON 128
+
+# Library for RTL & BENCH
+# rm -rf ./LIB/LIB_RTL
+# rm -rf ./LIB/LIB_BENCH
+
+vlib ./LIB/LIB_RTL
+vmap LIB_RTL ./LIB/LIB_RTL
+vlib ./LIB/LIB_BENCH
+vmap LIB_RTL ./LIB/LIB_BENCH
+
+# Compilation du package ASCON
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/ascon_pack.sv
+
+# Compilation SRC RTL
+vlog -sv +acc -svinputport=net -work LIB_RTL ./SRC/RTL/constant_addition.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL ./SRC/RTL/ascon_sbox.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/substitution_layer.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/diffusion_layer.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/state_register_w_en.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/register_w_en.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/mux_state.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/permutation_V1.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/compteur_simple_init.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/compteur_double_init.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/FSM_init.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/ASCON_top_init.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/xor_begin_perm.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/xor_end_perm.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/permutation_xor.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/FSM.sv
+vlog -sv +acc -svinputport=net -work LIB_RTL -L LIB_RTL ./SRC/RTL/ascon_top.sv
+
+# Compilation SRC BENCH
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/constant_addition_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/ascon_sbox_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/substitution_layer_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/diffusion_layer_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/permutation_V1_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/ASCON_top_init_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/permutation_xor_step1_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/permutation_xor_tb.sv
+vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/ascon_top_tb.sv
+
+# Simulation
+# /!\ Décommenter uniquement une commande de simulation ci-dessous
+# vsim -L LIB_RTL LIB_BENCH.constant_add_tb
+# vsim -L LIB_RTL LIB_BENCH.sbox_tb
+# vsim -L LIB_RTL LIB_BENCH.substitution_layer_tb
+# vsim -L LIB_RTL LIB_BENCH.diffusion_layer_tb
+#vsim -L LIB_RTL LIB_BENCH.permutation_V1_tb
+# vsim -L LIB_RTL LIB_BENCH.ASCON_top_init_tb
+# vsim -L LIB_RTL LIB_BENCH.permutation_xor_step1_tb
+# vsim -L LIB_RTL LIB_BENCH.permutation_xor_tb
+ vsim -L LIB_RTL LIB_BENCH.ascon_top_tb
+
