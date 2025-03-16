@@ -14,6 +14,8 @@ The overall architecture of ASCON128 comprises several interconnected SystemVeri
 - **state_register_w_en Module**: Conditional activation register maintaining internal algorithm states.
 - **ascon_top Module**: Main interface linking all modules, managed by a finite state machine (FSM).
 
+<img width="721" alt="Image" src="https://github.com/user-attachments/assets/32bbfcf8-adda-4f4a-b55a-22745032d708" />
+
 ## Detailed Module Description
 
 ### Permutation Module
@@ -102,3 +104,4 @@ source init_modelsim.txt
 source compil_ascon.txt
 do ./SRC/BENCH/permutation_xor_tb.do
 ```
+For further information on this project check the report `Rapport_ASCON.pdf` 
