@@ -44,13 +44,13 @@ vlog -sv +acc -svinputport=net -work LIB_BENCH -L LIB_RTL ./SRC/BENCH/ascon_top_
 
 # Simulation
 # /!\ Décommenter uniquement une commande de simulation ci-dessous
-# vsim -L LIB_RTL LIB_BENCH.constant_add_tb
-# vsim -L LIB_RTL LIB_BENCH.sbox_tb
-# vsim -L LIB_RTL LIB_BENCH.substitution_layer_tb
-# vsim -L LIB_RTL LIB_BENCH.diffusion_layer_tb
-#vsim -L LIB_RTL LIB_BENCH.permutation_V1_tb
-# vsim -L LIB_RTL LIB_BENCH.ASCON_top_init_tb
-# vsim -L LIB_RTL LIB_BENCH.permutation_xor_step1_tb
-# vsim -L LIB_RTL LIB_BENCH.permutation_xor_tb
- vsim -L LIB_RTL LIB_BENCH.ascon_top_tb
+# vsim -L LIB_RTL LIB_BENCH.constant_add_tb &
+# vsim -L LIB_RTL LIB_BENCH.sbox_tb &
+# vsim -L LIB_RTL LIB_BENCH.substitution_layer_tb &
+# vsim -L LIB_RTL LIB_BENCH.diffusion_layer_tb &
+# vsim -L LIB_RTL LIB_BENCH.permutation_V1_tb &
+# vsim -L LIB_RTL LIB_BENCH.ASCON_top_init_tb &
+# vsim -L LIB_RTL LIB_BENCH.permutation_xor_step1_tb &
+# vsim -L LIB_RTL LIB_BENCH.permutation_xor_tb &
+ vsim -L LIB_RTL LIB_BENCH.ascon_top_tb &
 
